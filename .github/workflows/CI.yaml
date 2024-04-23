@@ -33,10 +33,10 @@ jobs:
             pip install -r requirements.txt
 
         - name: Run tests
-          run: python -m pytest --cov=project
+          run: python -m pytest
 
         - name: Upload coverage reports to Codecov
           uses: codecov/codecov-action@v4.0.1
           with:
             token: ${{ secrets.CODECOV_TOKEN }}
-            slug: jenicekhartigu/stin2024-weatherAp
+            slug: jenicekhartigu/stin2024-weatherApp
