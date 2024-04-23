@@ -1,7 +1,7 @@
 [![codecov](https://codecov.io/gh/jenicekhartigu/stin2024-weatherApp/graph/badge.svg?token=CNEQPRBCIG)](https://codecov.io/gh/jenicekhartigu/stin2024-weatherApp)
 
 
-uplouad 
+uplouad 2
 
 Init push of app
 
