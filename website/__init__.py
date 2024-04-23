@@ -1,4 +1,7 @@
 from flask import Flask
+from .person import Person
+
+__all__ = ("Person",)
 
 def create_app():
     app = Flask(__name__)
