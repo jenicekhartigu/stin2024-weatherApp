@@ -5,13 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 import os
 
-
-
 db = SQLAlchemy()
 DB_NAME = "database.db"
-
-
-
 
 def create_app():
     app = Flask(__name__)
