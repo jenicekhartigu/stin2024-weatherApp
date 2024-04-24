@@ -31,4 +31,4 @@ import pytest
 #     assert person.jobs == ["MicroNova Developer", "Profesionalní alkoholik"]
 
 def test_get_api_key():
-    assert os.getenv("KEY")
+    assert os.getenv("API_KEY")
