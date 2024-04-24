@@ -30,5 +30,28 @@ import pytest
 #     person.addJob("Profesionalní alkoholik")
 #     assert person.jobs == ["MicroNova Developer", "Profesionalní alkoholik"]
 
-def test_get_api_key():
-    assert os.getenv("API_KEY")
+import unittest
+from unittest.mock import patch, MagicMock
+
+from website.person import get_api_key
+
+
+class TestGetApiKey(unittest.TestCase):
+
+  @patch('os.getenv')
+  def test_get_api_key_with_valid_env_variable(self, mock_getenv):
+    """Tests if the function retrieves the API key from a valid environment variable."""
+    mock_getenv.return_value = 'valid_api_key'
+    api_key = get_api_key()
+    self.assertEqual(api_key, 'valid_api_key')
+
+  @patch('os.getenv')
+  def test_get_api_key_with_missing_env_variable(self, mock_getenv):
+    """Tests if the function returns None when the environment variable is missing."""
+    mock_getenv.return_value = None
+    api_key = get_api_key()
+    self.assertIsNone(api_key)
+
+
+if __name__ == '__main__':
+  unittest.main()
