@@ -1,23 +1,28 @@
 {% extends "nologpage.html" %} {% block title %}Home{% endblock %} {% block content1 %}
-    
 
-    <h1 align="center">Favorits</h1>
-    
     <ul class="list-group list-group-flush" id="notes">
       {% for note in user.notes %}
       <li class="list-group-item">
+        <form method="POST">
         {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+        <button type="button" class="btn btn-danger" style="float: right;" onClick="deleteNote({{ note.id }})">
           <span aria-hidden="true">&times;</span>
         </button>
+        <button type="button" class="btn btn-success" style="float: right;" onClick="{{ note.data }}">
+          <span aria-hidden="true">Show location</span>
+        </button>
+      </form>
       </li>
       {% endfor %}
     </ul>
+
+    {% if user.is_authenticated %}
+    <h1 align="center">Favorits</h1>
     <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add Place</button>
+      <div align="center" name="note">
+        <button type="submit" value="add_place" class="btn btn-primary">Add Place</button>
       </div>
     </form>
+    {% endif %}
+
     {% endblock %}

@@ -2,23 +2,14 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
-from .getAPIdata import getApiData
+from .getAPIdata import show_weather
 
 auth = Blueprint('auth', __name__)
-
-@auth.route('/nouser', methods = ['GET', 'POST'])
-def nologpage():
-    
-    cityName = request.form.get('name')
-    
-    loc, actualTemp, textWeather = getApiData(cityName)
-    
-    return render_template("nologpage.html", city_name = loc, actual_temp = actualTemp, weather = textWeather, user = None)
-
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        print("login")
         email = request.form.get('email')
         password = request.form.get('password')
 

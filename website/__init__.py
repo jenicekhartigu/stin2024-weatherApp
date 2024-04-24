@@ -1,9 +1,9 @@
 from flask import Flask
+import os
 from flask_login import LoginManager
 
 from flask_sqlalchemy import SQLAlchemy
-from os import path
-import os
+
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -36,3 +36,4 @@ def create_app():
         return User.query.get(int(id))
     
     return app
+
