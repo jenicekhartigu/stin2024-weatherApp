@@ -12,7 +12,7 @@ def test_getApiKey_return():
     assert getApiKey() == os.getenv('API_KEY')
 
 def test_getApiKey_notEmpty():
-    assert getApiKey() != None
+    assert None != getApiKey()
     
 
 
