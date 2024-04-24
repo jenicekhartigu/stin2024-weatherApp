@@ -31,6 +31,9 @@ jobs:
           run: |
             python -m pip install pytest
             pip install -r requirements.txt
+            echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+            echo "DB_LOGIN=${{ secrets.CON_STRING }}" >> .env
+            echo "KEY=${{ secrets.KEY }}" >> .env
 
         - name: Run tests
           run: python -m pytest --cov
