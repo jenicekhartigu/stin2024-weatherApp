@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
+
+from .person import getApiData
 from .models import Places
 from . import db
 import json
@@ -13,6 +15,8 @@ def home():
     if request.method == 'POST': 
         note = request.form.get('note')#Gets the note from the HTML 
 
+        print("favorits")
+        
         if len(note) < 1:
             flash('Note is too short!', category='error') 
         else:
