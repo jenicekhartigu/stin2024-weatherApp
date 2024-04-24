@@ -33,6 +33,6 @@ def getApiData(cityName):
     textWeather = weather_data['current']['condition']['text']
     imgWeather = weather_data['current']['condition']['icon']
     
-    print(type(imgWeather))
+    # print(type(imgWeather))
     
     return loc, actualTemp, textWeather
