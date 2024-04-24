@@ -21,5 +21,5 @@ class Person:
         self.age += 1
         
     def addJob(self, title: str) -> None:
-        self.jobs.append(title)     
+        self.jobs.append(title)  
         

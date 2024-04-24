@@ -1,3 +1,38 @@
-{% extends "base.html" %} 
-{% block title%} Weather App {% endblock%}
-{%block content%} No logged user tady bude appka{%endblock%}
+{% extends "base.html" %} {% block title%} Weather App {% endblock%} {%block
+content%}
+
+<form class="container" method="post">
+  <div class="form-group">
+    <h2 align="center"> City Name </h2> <input
+      type="text"
+      class="form-control"
+      placeholder="City Name"
+      name="name"
+    />
+  </div>
+  <div align="center">
+  <button type="submit" class="btn btn-primary">Search Now</button>
+  </div>
+</form>
+
+<div class="container">
+    <h1 align="center">Actual weather</h1>
+    
+        <div class="row">
+          <div class="col-md-4">
+            <p>Place: {{ city_name }}</p>
+          </div>
+          <div class="col-md-4">
+            <p>Min temperature: {{min_temp}}&deg;C</p>
+            <p>Max temperature: {{max_temp}}&deg;C</p>
+          </div>
+          <div class="col-md-4">
+            <p>Weather: {{ weather }}</p>
+          </div>
+        </div>
+      </div>
+
+
+<div class="container">{% block content1 %} {% endblock %}</div>
+
+{%endblock%}
