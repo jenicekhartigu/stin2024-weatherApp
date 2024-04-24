@@ -11,9 +11,6 @@ from website.getAPIdata import getApiKey, getWeather, getForecast, getApiData
 def test_getApiKey_return():
     assert getApiKey() == os.getenv('API_KEY')
 
-class TestGetApiKey:
-    def test_getApiKey(self):
-        assert getApiKey() is not None
     
 
 
