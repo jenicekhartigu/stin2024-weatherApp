@@ -21,15 +21,21 @@ def home():
         if isinstance(mesto,str) and add is None:
             print(mesto)
             
-            weather_data, _ , _, _, city = show_weather(mesto)
+            weather_data, weather_forecast, weather_history, _, city = show_weather(mesto)
         
             text = weather_data['current']['condition']['text']
             iconUrl = weather_data['current']['condition']['icon']
             actualTemp = weather_data['current']['temp_c']
             
+            print(weather_forecast)
+            print()
+            print(weather_history)
+            
+            
+            
             lastPlace[0] = city
 
-            return render_template("home.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=current_user)
+            return render_template("home.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, history = weather_history ,user=current_user)
     
         if mesto is None and add is None:
             
