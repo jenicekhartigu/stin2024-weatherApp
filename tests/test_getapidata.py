@@ -13,7 +13,7 @@ def test_getApiKey_return():
 
 def test_getApiKey_notEmpty():
     api_key = getApiKey()
-    assert api_key is not None
+    assert api_key != None
     
 
 
