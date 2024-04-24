@@ -27,7 +27,6 @@ def getApiData(cityName):
     else:
         error = None
     
-    print(weather_data['current'])
     loc = weather_data['location']['name']
     actualTemp = weather_data['current']['temp_c']
     textWeather = weather_data['current']['condition']['text']
