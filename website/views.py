@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, jsonify
-from flask_login import login_required, current_user, AnonymousUserMixin
+from flask_login import login_required, current_user
 from website.getAPIdata import *
 
 from .models import Places
@@ -19,29 +19,30 @@ def home():
         add = request.form.get('note')
         
         if isinstance(mesto,str) and add is None:
-            print(mesto)
+            if mesto == '':
+                flash('No place selected!', category='error') 
+            else:
+                weather_data, _, weather_history, _, city = show_weather(mesto)
             
-            weather_data, weather_forecast, weather_history, _, city = show_weather(mesto)
-        
-            text = weather_data['current']['condition']['text']
-            iconUrl = weather_data['current']['condition']['icon']
-            actualTemp = weather_data['current']['temp_c']
-            
-            print(weather_forecast)
-            print()
-            print(weather_history)
-            
-            
-            
-            lastPlace[0] = city
+                text = weather_data['current']['condition']['text']
+                iconUrl = weather_data['current']['condition']['icon']
+                actualTemp = weather_data['current']['temp_c']
 
-            return render_template("home.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, history = weather_history ,user=current_user)
+                lastPlace[0] = city
+
+                return render_template("home.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, history = weather_history ,user=current_user)
     
         if mesto is None and add is None:
             
             if lastPlace[0] is None:
                 flash('No place selected!', category='error') 
             else:
+                
+                _, forecast, _, _, _ = show_weather(mesto)
+                
+                for i in forecast['location']['time']:
+                    print(i)
+                
                 new_note = Places(data=lastPlace[0], user_id=current_user.id)  #providing the schema for the note 
                 db.session.add(new_note) #adding the note to the database 
                 db.session.commit()
@@ -52,7 +53,7 @@ def home():
 
     return render_template("home.html", user=current_user)
 
-@views.route('/nologpage', methods=['GET', 'POST'])
+@views.route('/nolog', methods=['GET', 'POST'])
 def nologpage():
     if request.method == 'POST': 
         mesto = request.form.get('getMesto')#Gets the note from the HTML
