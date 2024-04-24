@@ -2,26 +2,26 @@ from dotenv import load_dotenv
 import os
 import requests
 
-def get_api_key():
+def getApiKey():
     load_dotenv()
     api_key = os.getenv('API_KEY')
     return api_key
 
-def get_weather(city):
-    url = f"http://api.weatherapi.com/v1/current.json?key={get_api_key()}&q={city}"
+def getWeather(city):
+    url = f"http://api.weatherapi.com/v1/current.json?key={getApiKey()}&q={city}"
     response = requests.get(url)
     data = response.json()
     return data
 
-def get_forecast(city):
-    url = f"http://api.weatherapi.com/v1/forecast.json?key={get_api_key()}&q={city}&days=7"
+def getForecast(city):
+    url = f"http://api.weatherapi.com/v1/forecast.json?key={getApiKey()}&q={city}&days=7"
     response = requests.get(url)
     data = response.json()
     return data
 
 def getApiData(cityName):
-    weather_data = get_weather(cityName)
-    weather_forecast = get_forecast(cityName)
+    weather_data = getWeather(cityName)
+    weather_forecast = getForecast(cityName)
     if 'error' in weather_data or 'error' in weather_forecast:
         error = weather_data['error']['message']
     else:
