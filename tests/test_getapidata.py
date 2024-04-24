@@ -24,3 +24,7 @@ def test_show_weather():
     city = "Prague"
     weather_data, weather_forecast, weather_history, error, loc = show_weather(city)
     assert error is None
+
+def test_current_location():
+    result = current_location()
+    assert result == None
