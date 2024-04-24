@@ -1,17 +1,20 @@
-{% extends "nologpage.html" %} {% block title %}Home{% endblock %} {% block content1 %}
+{% extends "nologpage.html" %} {% block title %}Home{% endblock %} 
+{% block content1 %}
 
     <ul class="list-group list-group-flush" id="notes">
       {% for note in user.notes %}
       <li class="list-group-item">
         <form method="POST">
-        {{ note.data }}
-        <button type="button" class="btn btn-danger" style="float: right;" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <button type="button" class="btn btn-success" style="float: right;" onClick="{{ note.data }}">
-          <span aria-hidden="true">Show location</span>
-        </button>
-      </form>
+          {{ note.data }}
+          <button type="button" class="btn btn-danger" style="float: right;" onClick="deleteNote({{ note.id }})">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </form>
+        <form method="POST">
+          <button name="getMesto" type="button" class="btn btn-success" style="float: right;">
+            <span aria-hidden="true">Show location</span>
+          </button>
+        </form>
       </li>
       {% endfor %}
     </ul>
