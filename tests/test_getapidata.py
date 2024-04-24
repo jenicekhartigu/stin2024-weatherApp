@@ -7,23 +7,27 @@ from unittest.mock import patch, MagicMock
 
 from website.getAPIdata import getApiKey, getWeather, getForecast, getApiData
 
+class TestGetApiKey(unittest.TestCase):
+    def test_getApiKey_return(self):
+        self.assertEqual(getApiKey(), os.getenv('API_KEY'))
 
-def test_getApiKey_return():
-    assert getApiKey() == os.getenv('API_KEY')
+class TestGetWeather(unittest.TestCase):
+    def test_get_weather_valid_city(self):
+        city = 'London'
+        loc, actualTemp, textWeather = getApiData(city)
+        self.assertEqual(loc,'London')
+        self.assertTrue(isinstance(actualTemp,float))
+        self.assertTrue(isinstance(textWeather, str))
 
-    
-def test_get_weather_valid_city():
-    city = 'London'
-    loc, actualTemp, textWeather = getApiData(city)
-    assert loc == 'London'
-    assert isinstance(actualTemp, float)
-    assert isinstance(textWeather, str)
+class TestGetForecast(unittest.TestCase):
+    def test_get_forecast_valid_city(self):
+        city = 'London'
+        forecast_data = getForecast(city)
+        self.assertTrue('error' not in forecast_data)
+        self.assertTrue('forecast' in forecast_data)
+        self.assertEqual(forecast_data['location']['name'],city)
+        self.assertEqual(len(forecast_data['forecast']['forecastday']), 7)
+        
+if __name__ == '__main__':
+    unittest.main() 
 
-
-def test_get_forecast_valid_city():
-    city = 'London'
-    forecast_data = getForecast(city)
-    # assert 'error' not in forecast_data
-    assert 'forecast' in forecast_data
-    assert forecast_data['location']['name'] == city
-    assert len(forecast_data['forecast']['forecastday']) == 7
