@@ -1,31 +1,6 @@
-from typing import Collection
-
 from dotenv import load_dotenv
 import os
 import requests
-
-class Person:
-    def __init__(
-        self, name: str, age: int, *, jobs: Collection[str] | None = None
-    ) -> None:
-        self.name = name
-        self.age = age
-        self.jobs = jobs or []
-        
-    @property
-    def forename(self) -> str:
-        return self.name.split(" ")[0]
-    
-    @property
-    def surname(self) -> str:
-        name = self.name.split(" ")[-1]
-        return name if name != self.forename else None
-
-    def celebrateBirthday(self) -> None:
-        self.age += 1
-        
-    def addJob(self, title: str) -> None:
-        self.jobs.append(title)  
 
 def get_api_key():
     load_dotenv()
@@ -52,10 +27,12 @@ def getApiData(cityName):
     else:
         error = None
     
-    
+    print(weather_data['current'])
     loc = weather_data['location']['name']
     actualTemp = weather_data['current']['temp_c']
-    textWeather =weather_data['current']['condition']['text']
-
+    textWeather = weather_data['current']['condition']['text']
+    imgWeather = weather_data['current']['condition']['icon']
+    
+    print(type(imgWeather))
     
     return loc, actualTemp, textWeather

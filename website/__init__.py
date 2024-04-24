@@ -5,12 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 import os
 
-from .person import Person
+
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
-__all__ = ("Person",)
 
 
 
