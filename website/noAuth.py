@@ -1,9 +1,6 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash
 
 from website.getAPIdata import current_location, show_weather
-from .models import Places
-from . import db
-import json
 
 noAuth = Blueprint('noAuth', __name__)
 
