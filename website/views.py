@@ -56,8 +56,6 @@ def home():
                 lastPlace[0] = None
                 resultStr = None
                 
-                return render_template("home.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=current_user)
-                
                 
             return render_template("home.html", user=current_user)
     else:
