@@ -46,8 +46,7 @@ def home():
                 
                 resultStr = date + " in " + lastPlace[0] + " will be average temp: " + str(avgTemp) + "°C" + " and " + text
                 
-                print(forecast)
-
+                print(current_user.id)
                 
                 new_note = Places(data=resultStr, user_id=current_user.id)  #providing the schema for the note 
                 db.session.add(new_note) #adding the note to the database 

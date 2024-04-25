@@ -1,10 +1,10 @@
+from unittest.mock import patch
 from website import *
 import pytest
 
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
 
 @pytest.fixture
 def app():
