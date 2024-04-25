@@ -2,7 +2,7 @@ from flask import Flask, url_for
 from flask_login import LoginManager
 from website.tools.auth import login, logout, appNoUser
 from website.tools.models import User
-from website import create_app
+from website import *
 from unittest.mock import patch, MagicMock
 import pytest
 
@@ -13,7 +13,10 @@ from website import create_app
 @pytest.fixture
 def app():
     app = create_app()
+    with app.app_context():
+        db.create_all()
     yield app
+
 
 @pytest.fixture
 def client(app):
