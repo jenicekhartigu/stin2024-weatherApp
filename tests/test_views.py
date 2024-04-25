@@ -38,13 +38,6 @@ def test_delete_note(mock_current_user, mock_db, mock_Places):
     # Check if the result is an empty JSON object
     assert True
 
-
-    
-    
-def test_appNoUser():
-    
-    assert True
-
 import pytest
 from flask import Flask
 from website.tools.views import noUserApp
@@ -69,10 +62,6 @@ def test_noUserApp():
     assert response.status_code == 200
 
     # Check the content of the response
-    assert True
-    
-def test_home():
-    
     assert True
     
     
