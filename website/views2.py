@@ -10,37 +10,6 @@ views = Blueprint('views', __name__)
 
 lastPlace = [None]
 
-def render_nolog_page(city=None, actual_temp=None, weather=None, weather_image=None):
-    """Render the nologpage template."""
-    return render_template("nologpage.html", city_name=city, actual_temp=actual_temp, weather=weather, weather_image=weather_image, user=None)
-
-
-def handle_post_request():
-    """Handle POST request."""
-    mesto = request.form.get('getMesto')
-    if not mesto:
-        flash('No city', category='error')
-        return render_nolog_page()
-
-    weather_data, _, _, _, city = show_weather(mesto)
-    current_weather = weather_data['current']
-    text = current_weather['condition']['text']
-    icon_url = current_weather['condition']['icon']
-    actual_temp = current_weather['temp_c']
-    
-    return render_nolog_page(city, actual_temp, text, icon_url)
-
-def handle_get_request():
-    """Handle GET request."""
-    location = current_location()
-    mesto = location[1]['location']['name']
-    weather_data, _, _, _, city = show_weather(mesto)
-    current_weather = weather_data['current']
-    text = current_weather['condition']['text']
-    icon_url = current_weather['condition']['icon']
-    actual_temp = current_weather['temp_c']
-    
-    return render_nolog_page(city, actual_temp, text, icon_url)
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
@@ -113,16 +82,37 @@ def noUserApp():
     return render_template("nologpage.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=None)
 
 @views.route('/nologin', methods=['GET', 'POST'])
-
 def appNoUser():
-    user = None
-    if request.method == 'POST':
-        return handle_post_request(user)
+    if request.method == 'POST': 
+        mesto = request.form.get('getMesto')#Gets the note from the HTML
+        if mesto == '': 
+            flash('No city', category='error')
+            return render_template("nologpage.html", user=None)
+        else:
+            
+            weather_data, _ , _, _, city = show_weather(mesto)
+            
+            text = weather_data['current']['condition']['text']
+            iconUrl = weather_data['current']['condition']['icon']
+            actualTemp = weather_data['current']['temp_c']
+
+            return render_template("nologpage.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=None)
+
     elif request.method == 'GET':
-        return handle_get_request(user)
+        location = current_location()
+        
+        mesto = location[1]['location']['name']
+        
+        weather_data, _ , _, _, city = show_weather(mesto)
+        
+        text = weather_data['current']['condition']['text']
+        iconUrl = weather_data['current']['condition']['icon']
+        actualTemp = weather_data['current']['temp_c']
+        
+        return render_template("nologpage.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=None)
+
     else:
         return render_template("base.html", user = None)
-    
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
     note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
