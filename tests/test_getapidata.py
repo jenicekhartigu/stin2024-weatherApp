@@ -1,5 +1,5 @@
 
-from website.getAPIdata import get_weather, get_forecast, get_history, show_weather, current_location, get_api_key
+from website.tools.getAPIdata import get_weather, get_forecast, get_history, show_weather, current_location, get_api_key
 
 def test_get_weather():
     city = "Prague"
