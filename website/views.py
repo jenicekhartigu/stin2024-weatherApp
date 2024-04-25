@@ -37,18 +37,13 @@ def home():
             if lastPlace[0] is None:
                 flash('No place selected!', category='error') 
             else:
-                
                 _, forecast, _, _, _ = show_weather(mesto)
                 
                 date = forecast['forecast']['forecastday'][0]['date']
-                
                 text = forecast['forecast']['forecastday'][0]['day']['condition']['text']
-                
                 avgTemp = forecast['forecast']['forecastday'][0]['day']['avgtemp_c']
                 
                 resultStr = date + " in " + lastPlace[0] + " will be average temp: " + str(avgTemp) + "°C" + " and " +text
-                
-                allData = [lastPlace[0],date, avgTemp, text]
 
                 new_note = Places(data=resultStr, user_id=current_user.id)  #providing the schema for the note 
                 db.session.add(new_note) #adding the note to the database 
@@ -71,7 +66,7 @@ def home():
         return render_template("home.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=current_user)
 
 
-@views.route('/nolog', methods=['GET', 'POST'])
+@views.route('/no-user', methods=['GET', 'POST'])
 def nologpage():
     if request.method == 'POST': 
         mesto = request.form.get('getMesto')#Gets the note from the HTML
