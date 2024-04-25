@@ -61,9 +61,9 @@ def home():
     else:
         location = current_location()
         
-        mesto = location['location']['name']
+        mesto = location
         
-        weather_data, _ , _, _, city = show_weather(mesto)
+        weather_data, _ , _, _, city = show_weather('Liberec')
         
         text = weather_data['current']['condition']['text']
         iconUrl = weather_data['current']['condition']['icon']

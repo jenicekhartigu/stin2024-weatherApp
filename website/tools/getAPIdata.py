@@ -62,7 +62,7 @@ def current_location():
                 city_name = data.get("city")
                 return show_weather(city_name)
             else:
-                return None
+                return show_weather('Liberec')
     except Exception as e:
         print("Error:", e)
         return None
