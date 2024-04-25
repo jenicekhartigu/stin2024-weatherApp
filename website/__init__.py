@@ -16,13 +16,11 @@ def create_app():
     
     from .views import views
     from .auth import auth
-    from .noAuth import noAuth
     
     db.init_app(app)
     
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-    app.register_blueprint(noAuth, url_prefix='/')
     
     from .models import User, Places
 
