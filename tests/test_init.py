@@ -5,6 +5,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
 @pytest.fixture
 def app():
     app = create_app()

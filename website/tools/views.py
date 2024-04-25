@@ -57,7 +57,7 @@ def home():
                 resultStr = None
                 
                 
-            return render_template("login.html", user=current_user)
+            return render_template("home.html", user=current_user)
     else:
         location = current_location()
         
