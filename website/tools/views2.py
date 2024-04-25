@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from website.getAPIdata import *
-from . import db
+from website.tools.getAPIdata import *
+from website import db
 import json
 
 from .models import Places
@@ -37,25 +37,19 @@ def home():
             if lastPlace[0] is None:
                 flash('No place selected!', category='error') 
             else:
-                print(lastPlace)
-                _, forecast, _, _, _ = show_weather(lastPlace[0])
+                _, forecast, _, _, _ = show_weather(mesto)
                 
                 date = forecast['forecast']['forecastday'][0]['date']
                 text = forecast['forecast']['forecastday'][0]['day']['condition']['text']
                 avgTemp = forecast['forecast']['forecastday'][0]['day']['avgtemp_c']
                 
-                resultStr = date + " in " + lastPlace[0] + " will be average temp: " + str(avgTemp) + "°C" + " and " + text
-                
-                print(forecast)
+                resultStr = date + " in " + lastPlace[0] + " will be average temp: " + str(avgTemp) + "°C" + " and " +text
 
-                
                 new_note = Places(data=resultStr, user_id=current_user.id)  #providing the schema for the note 
                 db.session.add(new_note) #adding the note to the database 
                 db.session.commit()
                 flash('Place added!', category='success')
                 lastPlace[0] = None
-                resultStr = None
-                
                 
             return render_template("home.html", user=current_user)
     else:

@@ -14,15 +14,15 @@ def create_app():
     config_type = os.getenv('CONFIG_TYPE', default='config.Config')
     app.config.from_object(config_type)
     
-    from .views import views
-    from .auth import auth
+    from .tools.views import views
+    from .tools.auth import auth
     
     db.init_app(app)
     
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     
-    from .models import User, Places
+    from .tools.models import User, Places
 
     with app.app_context():
         db.create_all()

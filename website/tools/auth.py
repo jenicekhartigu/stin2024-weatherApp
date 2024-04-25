@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 
-from website.getAPIdata import current_location, show_weather
+from website.tools.getAPIdata import current_location, show_weather
 from .models import User
-from . import db   ##means from __init__.py import db
+from website import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
