@@ -45,7 +45,11 @@ Aplikace je v anglickém jazyce. Systém se bude skládat z několika webových 
    - zobrazování historie počasí v daném městě, v rozsahu 7 dní zpátky
    - možnost přídání si oblíbeného místa, u kterého je vypsána předpověd počasí na 1 den dopředu v textovém zobrazení
   
-5. Přihlášeným uživatelům je přídáno tlačítko na odhlášení z ůčtu W
+5. Přihlášeným uživatelům je přídáno tlačítko na odhlášení z ůčtu
+
+## Struktura aplikace
+
+![UseCase](pic/stindiagram.png)
 
 ## Chybové stavy
 Uživatel bude při chybě buď z jeho strany, nebo ze strany serveru upozorňován vhodnými prostředky tak, aby mu napomáhali tento problém vyřešit a aby docházelo ke správné činnosti systému.
