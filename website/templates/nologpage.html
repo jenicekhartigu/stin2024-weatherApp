@@ -54,7 +54,6 @@
     </div>
       {% if user.is_authenticated %}
       <h3>History data</h3>
-    </br>
       {% for i in history%}
       <div class="row" style= "border:1px solid black;">
         <div class="col-sm-3">
@@ -68,11 +67,8 @@
         </div>
         <div class="col-sm-3">
           <p>{{ i.temp_c }}&deg;C<p>
-        </div>
-      
-        
+          </div>
       </div>
-    </br>
       {% endfor %}
       {% endif %}
       

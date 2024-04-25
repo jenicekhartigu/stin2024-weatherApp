@@ -81,7 +81,7 @@
 </div>
 
 <div class="container">
-
+  <h1 align="center">Favorits</h1>
     <ul class="list-group list-group-flush" id="notes">
       {% for note in user.notes %}
       <li class="list-group-item">
@@ -91,17 +91,12 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </form>
-        <form method="POST">
-          <button name="getMesto" type="button" class="btn btn-success" style="float: right;">
-            <span aria-hidden="true">Show location</span>
-          </button>
-        </form>
       </li>
       {% endfor %}
     </ul>
 
     {% if user.is_authenticated %}
-    <h1 align="center">Favorits</h1>
+    
     <form method="POST">
       <div align="center" name="note">
         <button type="submit" value="add_place" class="btn btn-primary">Add Place</button>

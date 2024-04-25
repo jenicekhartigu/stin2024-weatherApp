@@ -42,16 +42,15 @@ def home():
                 
                 date = forecast['forecast']['forecastday'][0]['date']
                 
-                icon = forecast['forecast']['forecastday'][0]['day']['condition']['icon']
                 text = forecast['forecast']['forecastday'][0]['day']['condition']['text']
                 
-                maxTemp = forecast['forecast']['forecastday'][0]['day']['maxtemp_c']
                 avgTemp = forecast['forecast']['forecastday'][0]['day']['avgtemp_c']
-                minTemp = forecast['forecast']['forecastday'][0]['day']['mintemp_c']
                 
+                resultStr = date + " in " + lastPlace[0] + " will be average temp: " + str(avgTemp) + "°C" + " and " +text
                 
-                
-                new_note = Places(data=lastPlace[0], user_id=current_user.id)  #providing the schema for the note 
+                allData = [lastPlace[0],date, avgTemp, text]
+
+                new_note = Places(data=resultStr, user_id=current_user.id)  #providing the schema for the note 
                 db.session.add(new_note) #adding the note to the database 
                 db.session.commit()
                 flash('Place added!', category='success')
