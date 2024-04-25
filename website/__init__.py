@@ -8,11 +8,14 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
-def create_app():
+def create_app(test_config = None):
     app = Flask(__name__)
     
-    config_type = os.getenv('CONFIG_TYPE', default='config.DevelopmentConfig')
-    app.config.from_object(config_type)
+    if test_config is not None:
+        app.config.from_mapping(test_config)
+    else:
+        config_type = os.getenv('CONFIG_TYPE', default='config.DevelopmentConfig')
+        app.config.from_object(config_type)
     
     from .views import views
     from .auth import auth
@@ -28,7 +31,7 @@ def create_app():
         db.create_all()
             
     login_manager = LoginManager()
-    login_manager.login_view = 'views.no-user'
+    login_manager.login_view = 'views.home'
     login_manager.init_app(app)
     
     @login_manager.user_loader
