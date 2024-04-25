@@ -40,20 +40,39 @@ def home():
                 
                 _, forecast, _, _, _ = show_weather(mesto)
                 
-                for i in forecast['location']['time']:
-                    print(i)
+                date = forecast['forecast']['forecastday'][0]['date']
+                
+                icon = forecast['forecast']['forecastday'][0]['day']['condition']['icon']
+                text = forecast['forecast']['forecastday'][0]['day']['condition']['text']
+                
+                maxTemp = forecast['forecast']['forecastday'][0]['day']['maxtemp_c']
+                avgTemp = forecast['forecast']['forecastday'][0]['day']['avgtemp_c']
+                minTemp = forecast['forecast']['forecastday'][0]['day']['mintemp_c']
+                
+                
                 
                 new_note = Places(data=lastPlace[0], user_id=current_user.id)  #providing the schema for the note 
                 db.session.add(new_note) #adding the note to the database 
                 db.session.commit()
                 flash('Place added!', category='success')
                 lastPlace[0] = None
+                
             return render_template("home.html", user=current_user)
-    
+    else:
+        location = current_location()
+        
+        mesto = location[1]['location']['name']
+        
+        weather_data, _ , _, _, city = show_weather(mesto)
+        
+        text = weather_data['current']['condition']['text']
+        iconUrl = weather_data['current']['condition']['icon']
+        actualTemp = weather_data['current']['temp_c']
+        
+        return render_template("home.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=current_user)
 
-    return render_template("home.html", user=current_user)
 
-@views.route('/home', methods=['GET', 'POST'])
+@views.route('/nolog', methods=['GET', 'POST'])
 def nologpage():
     if request.method == 'POST': 
         mesto = request.form.get('getMesto')#Gets the note from the HTML
