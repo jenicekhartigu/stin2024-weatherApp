@@ -44,7 +44,7 @@ def appNoUser():
 
             return render_template("nologpage.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=None)
 
-    else:
+    elif request.method == 'GET':
         location = current_location()
         
         mesto = location[1]['location']['name']
@@ -56,6 +56,9 @@ def appNoUser():
         actualTemp = weather_data['current']['temp_c']
         
         return render_template("nologpage.html", city_name = city, actual_temp = actualTemp, weather = text, weather_image = iconUrl, user=None)
+
+    else:
+        return render_template("base.html", user = None)
 
 
 @views.route('/delete-note', methods=['POST'])
