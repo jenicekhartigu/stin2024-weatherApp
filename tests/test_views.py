@@ -74,3 +74,37 @@ def test_noUserApp():
 def test_home():
     
     assert True
+    
+    
+import pytest
+from flask import Flask, request
+from website.tools.views import appNoUser
+
+def create_test_app():
+    template_dir = os.path.abspath('website/templates')
+    app = Flask(__name__, template_folder=template_dir)
+    app.config['TESTING'] = True
+    app.config['WTF_CSRF_ENABLED'] = False
+    app.register_blueprint(views.views)
+    return app
+
+@pytest.fixture
+def client():
+    app = create_test_app()
+    with app.test_client() as client:
+        yield client
+
+@patch('website.tools.views.show_weather')
+def test_appNoUser_POST(mock_show_weather, client):
+    mock_show_weather.return_value = ({'current': {'condition': {'text': 'TestWeather', 'icon': 'TestIcon'}, 'temp_c': 'TestTemp'}}, None, None, None, 'TestCity')
+    response = client.post('/nologin', data={'getMesto': 'TestCity'})
+    assert response.status_code == 200
+    assert b'TestCity' in response.data
+
+@patch('website.tools.views.show_weather')
+@patch('website.tools.views.current_location')
+def test_appNoUser_GET(mock_current_location, mock_show_weather, client):
+    mock_current_location.return_value = [None, {'location': {'name': 'TestCity'}}]
+    mock_show_weather.return_value = ({'current': {'condition': {'text': 'TestWeather', 'icon': 'TestIcon'}, 'temp_c': 'TestTemp'}}, None, None, None, 'TestCity')
+    response = client.get('/nologin')
+    assert response.status_code == 200
