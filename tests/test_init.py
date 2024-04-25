@@ -8,6 +8,7 @@ def test_create_app():
     # Call the function and get the result
     app = create_app()
 
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     # Check if the result is a Flask application instance
     assert isinstance(app, Flask)
 
