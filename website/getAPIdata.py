@@ -67,34 +67,3 @@ def current_location():
         print("Error:", e)
         return None
     
-def render_page(page, user, city=None, actual_temp=None, weather=None, weather_image=None):
-    """Render the nologpage template."""
-    return render_template(page, city_name=city, actual_temp=actual_temp, weather=weather, weather_image=weather_image, user=user)
-
-
-def handle_post_request():
-    """Handle POST request."""
-    mesto = request.form.get('getMesto')
-    if not mesto:
-        flash('No city', category='error')
-        return render_page()
-
-    weather_data, _, _, _, city = show_weather(mesto)
-    current_weather = weather_data['current']
-    text = current_weather['condition']['text']
-    icon_url = current_weather['condition']['icon']
-    actual_temp = current_weather['temp_c']
-    
-    return render_page(city, actual_temp, text, icon_url)
-
-def handle_get_location(page, user):
-    """Handle GET request."""
-    location = current_location()
-    mesto = location[1]['location']['name']
-    weather_data, _, _, _, city = show_weather(mesto)
-    current_weather = weather_data['current']
-    text = current_weather['condition']['text']
-    icon_url = current_weather['condition']['icon']
-    actual_temp = current_weather['temp_c']
-    
-    return render_page(page, user, city, actual_temp, text, icon_url)
