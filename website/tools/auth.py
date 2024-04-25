@@ -27,10 +27,12 @@ def login():
 
     return render_template("login.html", user=current_user)
 
+
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
+    print("logout")
     return redirect(url_for('auth.login'))
 
 @auth.route('/nologin', methods=['GET', 'POST'])
