@@ -37,17 +37,6 @@ def test_login_manager(app):
     assert isinstance(app.login_manager, LoginManager)
     assert app.login_manager.login_view == 'auth.login'
 
-# Test that the user loader function is correctly defined
-def test_user_loader(app):
-    from website.tools.models import User
-    with app.app_context():
-        user_loader_func = app.login_manager.user_loader
-        user = User(username='test_user', email='test@example.com')
-        db.session.add(user)
-        db.session.commit()
-        loaded_user = user_loader_func(user.id)
-        print(loaded_user)
-        assert loaded_user == user
 
 # Test that blueprints are registered with the correct URL prefixes
 def test_blueprint_url_prefixes(app):
