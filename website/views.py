@@ -53,7 +53,7 @@ def home():
 
     return render_template("home.html", user=current_user)
 
-@views.route('/nolog', methods=['GET', 'POST'])
+@views.route('/home', methods=['GET', 'POST'])
 def nologpage():
     if request.method == 'POST': 
         mesto = request.form.get('getMesto')#Gets the note from the HTML
