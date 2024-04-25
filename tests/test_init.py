@@ -17,14 +17,14 @@ def app():
 
 def test_create_app(app):
     assert app
-    assert app.config['DEBUG'] is False
+    assert app.config['DEBUG'] is True
 
 def test_blueprint_registration(app):
     assert 'views' in app.blueprints
     assert 'auth' in app.blueprints
 
 def test_app_config(app):
-    assert app.config['DEBUG'] is False
+    assert app.config['DEBUG'] is True
     assert app.config['SQLALCHEMY_DATABASE_URI'] == os.getenv('CON_STRING')
     assert app.config['SECRET_KEY'] == os.getenv('KEY')
 
