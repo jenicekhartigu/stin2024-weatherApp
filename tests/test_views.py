@@ -1,3 +1,5 @@
+import os
+from website.tools import views
 from website.tools.views import home, noUserApp, appNoUser, delete_note
 import pytest
 from unittest.mock import patch, MagicMock
@@ -43,8 +45,30 @@ def test_appNoUser():
     
     assert True
 
+import pytest
+from flask import Flask
+from website.tools.views import noUserApp
+
 def test_noUserApp():
-    
+    # Create a Flask application instance
+    template_dir = os.path.abspath('website/templates')
+    app = Flask(__name__, template_folder=template_dir)
+    config_type = os.getenv('CONFIG_TYPE', default='config.TestingConfig')
+    app.config.from_object(config_type)
+
+    # Register the views blueprint
+    app.register_blueprint(views.views)
+
+    # Create a test client
+    client = app.test_client()
+
+    # Send a GET request to the '/app' route
+    response = client.get('/app')
+
+    # Check the status code of the response
+    assert response.status_code == 200
+
+    # Check the content of the response
     assert True
     
 def test_home():
