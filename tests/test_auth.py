@@ -19,7 +19,8 @@ def test_sign_up(mock_login_user, mock_db, mock_User):
 
     # Create a Flask application instance
     app = Flask(__name__)
-    app.secret_key = os.getenv('KEY')
+    config_type = os.getenv('CONFIG_TYPE', default='config.TestingConfig')
+    app.config.from_object(config_type)
 
     # Register the blueprints
     app.register_blueprint(views.views)
