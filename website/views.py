@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from website.getAPIdata import *
-
-from .models import Places
 from . import db
 import json
+
+from .models import Places
 
 views = Blueprint('views', __name__)
 
