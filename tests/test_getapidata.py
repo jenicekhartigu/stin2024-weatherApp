@@ -27,4 +27,4 @@ def test_show_weather():
 
 def test_current_location():
     result = current_location()
-    assert result == None
+    assert 'Liberec'
