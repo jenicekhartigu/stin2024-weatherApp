@@ -11,7 +11,7 @@ DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__)
     
-    config_type = os.getenv('CONFIG_TYPE', default='config.DevelopmentConfig')
+    config_type = os.getenv('CONFIG_TYPE', default='config.Config')
     app.config.from_object(config_type)
     
     from .views import views
