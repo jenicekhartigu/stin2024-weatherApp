@@ -61,7 +61,7 @@ def home():
     else:
         location = current_location()
         
-        mesto = location[1]['location']['name']
+        mesto = location['location']['name']
         
         weather_data, _ , _, _, city = show_weather(mesto)
         
